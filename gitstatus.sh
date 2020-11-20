@@ -58,29 +58,29 @@ if [[ -d "${git_dir}/rebase-merge" ]]; then
   __git_prompt_read "${git_dir}/rebase-merge/msgnum" step
   __git_prompt_read "${git_dir}/rebase-merge/end" total
   if [[ -f "${git_dir}/rebase-merge/interactive" ]]; then
-    state="|REBASE-i"
+    state=" │ rebase interactive"
   else
-    state="|REBASE-m"
+    state=" │ rebase merge"
   fi
 else
   if [[ -d "${git_dir}/rebase-apply" ]]; then
     __git_prompt_read "${git_dir}/rebase-apply/next" step
     __git_prompt_read "${git_dir}/rebase-apply/last" total
     if [[ -f "${git_dir}/rebase-apply/rebasing" ]]; then
-      state="|REBASE"
+      state=" │ rebase"
     elif [[ -f "${git_dir}/rebase-apply/applying" ]]; then
-      state="|AM"
+      state=" │ apply merge"
     else
-      state="|AM/REBASE"
+      state=" │ apply rebase merge"
     fi
   elif [[ -f "${git_dir}/MERGE_HEAD" ]]; then
-    state="|MERGING"
+    state=" │ merging"
   elif [[ -f "${git_dir}/CHERRY_PICK_HEAD" ]]; then
-    state="|CHERRY-PICKING"
+    state=" │ cherry-picking"
   elif [[ -f "${git_dir}/REVERT_HEAD" ]]; then
-    state="|REVERTING"
+    state=" │ reverting"
   elif [[ -f "${git_dir}/BISECT_LOG" ]]; then
-    state="|BISECTING"
+    state=" │ bisecting"
   fi
 fi
 
